@@ -1,14 +1,24 @@
-import React from "react";
-import { Checkbox, Badge, Avatar, Button, Tooltip } from "neetoui";
+import React, { useState } from "react";
+import {
+  Checkbox,
+  Badge,
+  Avatar,
+  Button,
+  Tooltip,
+  Alert,
+  Toastr,
+} from "neetoui";
 
 export default function NoteTable({
   selectedNoteIds,
   setSelectedNoteIds,
   notes = [],
 }) {
+  const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
+
   return (
     <div className="w-full px-4">
-      <table className="nui-table nui-table--checkbox  nui-table--actions">
+      <table className="nui-table nui-table--checkbox  nui-table--actions nui-table--hover">
         <thead>
           <tr>
             <th>
@@ -31,7 +41,8 @@ export default function NoteTable({
             <th className="text-center">Tags</th>
             <th className="text-center">Created Date</th>
             <th className="text-center">Due Date</th>
-            <th className="text-center">Conact</th>
+            <th className="text-center">Contact</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +72,7 @@ export default function NoteTable({
               <td className="flex flex-row items-center justify-start">
                 <Button style="link" label={note.title} />
               </td>
-              <td className="truncate text-left" style={{ maxWidth: 100 }}>
+              <td className="truncate text-left max-w-200">
                 {note.description}
               </td>
               <td className="text-center">
@@ -77,8 +88,14 @@ export default function NoteTable({
                   <Tooltip content="Edit" position="bottom">
                     <Button icon="ri-pencil-line" style="icon" />
                   </Tooltip>
-                  <Tooltip content="Delete" position="bottom" minimal>
-                    <Button icon="ri-delete-bin-line" style="icon" />
+                  <Tooltip content="Delete" position="bottom">
+                    <Button
+                      icon="ri-delete-bin-line"
+                      style="icon"
+                      onClick={() => {
+                        setIsDeleteAlertOpen(true);
+                      }}
+                    />
                   </Tooltip>
                 </div>
               </td>
@@ -86,6 +103,24 @@ export default function NoteTable({
           ))}
         </tbody>
       </table>
+      <Alert
+        isOpen={isDeleteAlertOpen}
+        title="Delete Note"
+        message="All of your data will be permanently removed from our database forever. This action cannot be undone."
+        confirmationText="Are you sure you want to delete the note?"
+        submitButtonProps={{
+          label: "Proceed",
+          onClick: () => {
+            setIsDeleteAlertOpen(false);
+            Toastr.success("Note deleted successfully");
+          },
+        }}
+        cancelButtonProps={{
+          onClick: () => {
+            setIsDeleteAlertOpen(false);
+          },
+        }}
+      />
     </div>
   );
 }
