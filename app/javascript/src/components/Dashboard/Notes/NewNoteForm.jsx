@@ -41,7 +41,7 @@ export default function NewNoteForm({ onClose, refetch }) {
             options={tags}
             name="tag"
             className="mb-6"
-            placeholder="Select contact"
+            placeholder="Select tag"
           />
           <Textarea
             label="Note Description"
