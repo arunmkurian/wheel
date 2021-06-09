@@ -28,3 +28,24 @@ export const notes = [
     contact: "C S",
   },
 ];
+
+export const tags = [
+  {
+    value: { name: "Internal", color: "blue" },
+    label: "Internal",
+  },
+  {
+    value: { name: "Agile workflow", color: "green" },
+    label: "Agile workflow",
+  },
+  {
+    value: { name: "Bug", color: "red" },
+    label: "Bug",
+  },
+];
+
+export const contacts = [
+  { label: "Neeraj S", value: "Neeraj S" },
+  { label: "Vinay chandran", value: "Vinay chandran" },
+  { label: "Charan Sam", value: "Charan Sam" },
+];

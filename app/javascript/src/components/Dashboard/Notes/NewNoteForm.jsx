@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import { Formik, Form } from "formik";
-import { Input, Textarea } from "neetoui/formik";
-import { Button } from "neetoui";
-import notesApi from "apis/notes";
+import { Input, Textarea, Select } from "neetoui/formik";
+import { Button, Toastr, Switch, DateInput } from "neetoui";
+import { tags, contacts } from "common/mock-data";
+// import notesApi from "apis/notes";
 
 export default function NewNoteForm({ onClose, refetch }) {
-  const handleSubmit = async values => {
+  const handleSubmit = async () => {
     try {
-      await notesApi.create(values);
+      // await notesApi.create(values);
+      Toastr.success("Note added successfully");
       refetch();
       onClose();
     } catch (err) {
       logger.error(err);
     }
   };
+
+  const [dueDateEnabled, setDueDateEnabled] = useState(false);
+  const [dueDate, setDueDate] = useState(new Date());
+
   return (
     <Formik
       initialValues={{
@@ -30,7 +36,45 @@ export default function NewNoteForm({ onClose, refetch }) {
       {({ isSubmitting }) => (
         <Form>
           <Input label="Title" name="title" className="mb-6" />
-          <Textarea label="Description" name="description" rows={8} />
+          <Select
+            label="Tags"
+            options={tags}
+            name="tag"
+            className="mb-6"
+            placeholder="Select tag"
+          />
+          <Textarea
+            label="Note Description"
+            name="description"
+            rows={8}
+            className="mb-6"
+          />
+          <Select
+            label="Assigned Contact"
+            options={contacts}
+            name="assignedContact"
+            className="mb-6"
+            placeholder="Select contact"
+          />
+          <div className="mb-6">
+            Add Due Date to Note
+            <Switch
+              id="dueDateSwitch"
+              className="float-right"
+              checked={dueDateEnabled}
+              onChange={e => setDueDateEnabled(e.target.checked)}
+            />
+          </div>
+          {dueDateEnabled && (
+            <DateInput
+              type="date"
+              label="Due date"
+              name="dueDate"
+              format="DD/MM/YYYY"
+              value={dueDate}
+              onChange={setDueDate}
+            />
+          )}
           <div className="nui-pane__footer nui-pane__footer--absolute">
             <Button
               onClick={onClose}
