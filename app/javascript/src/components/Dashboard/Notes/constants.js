@@ -1,6 +1,5 @@
 import * as yup from "yup";
 
-
 export const createNoteInitialValues = {
   title: "",
   tag: "",
