@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { Formik, Form } from "formik";
 import { Input, Textarea, Select } from "neetoui/formik";
-import { Button, Toastr, Switch, DateInput } from "neetoui";
+import { Button, Toastr, Switch, DateInput, Collapse } from "neetoui";
 import { tags, contacts } from "common/mock-data";
+import { 
+  createNoteInitialValues as initialValues, 
+  createNoteValidationSchema as validationSchema
+} from "./constants";
 // import notesApi from "apis/notes";
 
 export default function NewNoteForm({ onClose, refetch }) {
@@ -23,40 +27,31 @@ export default function NewNoteForm({ onClose, refetch }) {
 
   return (
     <Formik
-      initialValues={{
-        title: "",
-        description: "",
-      }}
+      initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={yup.object({
-        title: yup.string().required("Title is required"),
-        description: yup.string().required("Description is required"),
-      })}
+      validationSchema={validationSchema}
     >
       {({ isSubmitting }) => (
-        <Form>
-          <Input label="Title" name="title" className="mb-6" />
+        <Form className="space-y-6">
+          <Input label="Title" name="title"/>
           <Select
             label="Tags"
             options={tags}
             name="tag"
-            className="mb-6"
             placeholder="Select tag"
           />
           <Textarea
             label="Note Description"
             name="description"
             rows={8}
-            className="mb-6"
           />
           <Select
             label="Assigned Contact"
             options={contacts}
             name="assignedContact"
-            className="mb-6"
             placeholder="Select contact"
           />
-          <div className="mb-6">
+          <div>
             Add Due Date to Note
             <Switch
               id="dueDateSwitch"
@@ -65,8 +60,8 @@ export default function NewNoteForm({ onClose, refetch }) {
               onChange={e => setDueDateEnabled(e.target.checked)}
             />
           </div>
-          {dueDateEnabled && (
-            <DateInput
+          <Collapse open={dueDateEnabled}>
+              <DateInput
               type="date"
               label="Due date"
               name="dueDate"
@@ -74,7 +69,7 @@ export default function NewNoteForm({ onClose, refetch }) {
               value={dueDate}
               onChange={setDueDate}
             />
-          )}
+          </Collapse>
           <div className="nui-pane__footer nui-pane__footer--absolute">
             <Button
               onClick={onClose}
