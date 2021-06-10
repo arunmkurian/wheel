@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import * as yup from "yup";
 import { Formik, Form } from "formik";
 import { Input, Textarea, Select } from "neetoui/formik";
 import { Button, Toastr, Switch, DateInput, Collapse } from "neetoui";
 import { tags, contacts } from "common/mock-data";
-import { 
-  createNoteInitialValues as initialValues, 
-  createNoteValidationSchema as validationSchema
+import {
+  newNoteInitialValues as initialValues,
+  newNoteValidationSchema as validationSchema,
 } from "./constants";
 // import notesApi from "apis/notes";
 
@@ -33,18 +32,14 @@ export default function NewNoteForm({ onClose, refetch }) {
     >
       {({ isSubmitting }) => (
         <Form className="space-y-6">
-          <Input label="Title" name="title"/>
+          <Input label="Title" name="title" />
           <Select
             label="Tags"
             options={tags}
             name="tag"
             placeholder="Select tag"
           />
-          <Textarea
-            label="Note Description"
-            name="description"
-            rows={8}
-          />
+          <Textarea label="Note Description" name="description" rows={8} />
           <Select
             label="Assigned Contact"
             options={contacts}
@@ -61,7 +56,7 @@ export default function NewNoteForm({ onClose, refetch }) {
             />
           </div>
           <Collapse open={dueDateEnabled}>
-              <DateInput
+            <DateInput
               type="date"
               label="Due date"
               name="dueDate"
