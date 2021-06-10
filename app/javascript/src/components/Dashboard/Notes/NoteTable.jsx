@@ -69,8 +69,10 @@ export default function NoteTable({
                   }}
                 />
               </td>
-              <td className="flex flex-row items-center justify-start">
-                <Button style="link" label={note.title} />
+              <td>
+                <div className="flex flex-row items-center justify-left">
+                  <Button style="link" label={note.title} />
+                </div>
               </td>
               <td className="truncate text-left max-w-200">
                 {note.description}
