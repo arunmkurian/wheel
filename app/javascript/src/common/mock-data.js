@@ -44,8 +44,27 @@ export const tags = [
   },
 ];
 
-export const contacts = [
+export const contactDropdwonValues = [
   { label: "Neeraj S", value: "Neeraj S" },
   { label: "Vinay chandran", value: "Vinay chandran" },
   { label: "Charan Sam", value: "Charan Sam" },
+];
+
+export const contacts = [
+  {
+    id: 1,
+    name: "Neeraj Singh",
+    email: "neeraj@bigbinary.com",
+    department: "Engineering",
+    contactNumber: "54545451001",
+    addToBaseCamp: true,
+  },
+  {
+    id: 2,
+    name: "Vinay Chandran",
+    email: "vinay@bigbinary.com",
+    department: "Engineering",
+    contactNumber: "54545451001",
+    addToBaseCamp: false,
+  },
 ];
