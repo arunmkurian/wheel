@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Checkbox, Avatar, Button, Tooltip, Alert, Toastr } from "neetoui";
 
-export default function NoteTable({
+export default function ConatactTable({
   selectedContactIds,
   setSelectedContactIds,
   contacts = [],
@@ -98,7 +98,7 @@ export default function NoteTable({
       </table>
       <Alert
         isOpen={isDeleteAlertOpen}
-        title="Delete Note"
+        title="Delete Contact"
         message="All of your data will be permanently removed from our database forever. This action cannot be undone."
         confirmationText="Are you sure you want to delete the contact?"
         submitButtonProps={{
