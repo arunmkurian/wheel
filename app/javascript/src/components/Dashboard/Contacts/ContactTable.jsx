@@ -100,12 +100,12 @@ export default function NoteTable({
         isOpen={isDeleteAlertOpen}
         title="Delete Note"
         message="All of your data will be permanently removed from our database forever. This action cannot be undone."
-        confirmationText="Are you sure you want to delete the note?"
+        confirmationText="Are you sure you want to delete the contact?"
         submitButtonProps={{
           label: "Proceed",
           onClick: () => {
             setIsDeleteAlertOpen(false);
-            Toastr.success("Note deleted successfully");
+            Toastr.success("Contact deleted successfully");
           },
         }}
         cancelButtonProps={{
