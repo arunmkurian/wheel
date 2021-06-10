@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { PageLoader } from "neetoui";
+import { PageLoader, Button, Alert, Toastr } from "neetoui";
 import { Header, SubHeader } from "neetoui/layouts";
 import EmptyState from "components/Common/EmptyState";
 import EmptyNotesListImage from "images/EmptyNotesList";
+import { contacts as mockContacts } from "common/mock-data";
 
 import ContactTable from "./ContactTable";
-import { contacts as mockContacts } from "common/mock-data";
-import DeleteAlert from "./DeleteAlert";
+import NewContactPane from "./NewContactPane";
 
 const Contacts = () => {
   const [contacts, setContacts] = useState([{}]);
@@ -14,6 +14,7 @@ const Contacts = () => {
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const [showNewContactPane, setShowNewContactPane] = useState(false);
 
   const fetchContacts = useCallback(() => {
     try {
@@ -35,7 +36,19 @@ const Contacts = () => {
   }
   return (
     <>
-      <Header title="Contacts" />
+      <Header
+        title="Contacts"
+        actionBlock={
+          <Button
+            onClick={() => {
+              setShowNewContactPane(true);
+            }}
+            label="New Contact"
+            icon="ri-add-line"
+          />
+        }
+      />
+
       {contacts.length ? (
         <>
           <SubHeader
@@ -46,7 +59,6 @@ const Contacts = () => {
             }}
             deleteButtonProps={{
               onClick: () => setShowDeleteAlert(true),
-              disabled: !selectedContactIds.length,
             }}
             sortProps={{
               options: [
@@ -80,16 +92,33 @@ const Contacts = () => {
           image={EmptyNotesListImage}
           title="Looks like you don't have any contacts!"
           subtitle="Add your notes to send customized emails to them."
+          primaryAction={() => setShowNewContactPane(true)}
           primaryActionLabel="Add New Note"
         />
       )}
-      {showDeleteAlert && (
-        <DeleteAlert
-          selectedContactIds={selectedContactIds}
-          onClose={() => setShowDeleteAlert(false)}
-          refetch={fetchContacts}
-        />
-      )}
+      <NewContactPane
+        showPane={showNewContactPane}
+        setShowPane={setShowNewContactPane}
+        fetchContacts={fetchContacts}
+      />
+      <Alert
+        isOpen={showDeleteAlert}
+        title="Delete Contact"
+        message="All of your data will be permanently removed from our database forever. This action cannot be undone."
+        confirmationText="Are you sure you want to delete these contacts?"
+        submitButtonProps={{
+          label: "Proceed",
+          onClick: () => {
+            setShowDeleteAlert(false);
+            Toastr.success("Contacts deleted successfully");
+          },
+        }}
+        cancelButtonProps={{
+          onClick: () => {
+            setShowDeleteAlert(false);
+          },
+        }}
+      />
     </>
   );
 };

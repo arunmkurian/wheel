@@ -68,9 +68,11 @@ export default function ConatactTable({
                 <td className="text-left">{contact.email}</td>
                 <td className="text-left">{contact.department}</td>
                 <td className="text-left">{contact.contactNumber}</td>
-                <td className="flex flex-row items-center justify-center">
-                  <Checkbox checked={contact.addToBaseCamp} />
-                </td>
+                <div className="flex flex-row items-center justify-center">
+                  <td>
+                    <Checkbox checked={contact.addToBaseCamp} />
+                  </td>
+                </div>
                 <td className="text-center">
                   <div className="flex">
                     <Tooltip content="Edit" position="bottom">

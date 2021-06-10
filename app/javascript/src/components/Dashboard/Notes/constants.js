@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const createNoteInitialValues = {
+export const newNoteInitialValues = {
   title: "",
   tag: "",
   description: "",
@@ -8,7 +8,7 @@ export const createNoteInitialValues = {
   dueDate: new Date(),
 };
 
-export const createNoteValidationSchema = yup.object({
+export const newNoteValidationSchema = yup.object({
   title: yup.string().required("Title is required"),
   description: yup.string().required("Description is required"),
 });
