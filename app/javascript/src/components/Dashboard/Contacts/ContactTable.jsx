@@ -73,14 +73,10 @@ export default function ConatactTable({
                     <Checkbox checked={contact.addToBaseCamp} />
                   </div>
                 </td>
-                <td className="text-center">
-                  <div className="flex">
+                <td>
+                  <div className="flex flex-row items-center justify-center space-x-3">
                     <Tooltip content="Edit" position="bottom">
-                      <Button
-                        className="mr-2"
-                        style="icon"
-                        icon="ri-pencil-line"
-                      />
+                      <Button style="icon" icon="ri-pencil-line" />
                     </Tooltip>
                     <Tooltip content="Delete" position="bottom">
                       <Button
