@@ -86,7 +86,7 @@ export default function NoteTable({
                 <Avatar contact={{ name: note.contact }} />
               </td>
               <td>
-                <div className="flex flex-row items-center justify-end space-x-3">
+                <div className="flex flex-row items-center justify-center space-x-3">
                   <Tooltip content="Edit" position="bottom">
                     <Button icon="ri-pencil-line" style="icon" />
                   </Tooltip>

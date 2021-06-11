@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import { Input, Switch } from "neetoui/formik";
-import { Button, Toastr } from "neetoui";
+import { Button, Toastr, Label } from "neetoui";
 
 import {
   newContactInitialValues as initialValues,
@@ -38,11 +38,10 @@ export default function NewContactForm({ onClose, refetch }) {
             placeholder="Department"
             name="department"
           />
-          <Switch
-            label="Add to Basecamp"
-            name="addToBaseCamp"
-            className="flex-row-reverse justify-between"
-          />
+          <div className="flex justify-between">
+            <Label>Add to Basecamp</Label>
+            <Switch name="addToBaseCamp" />
+          </div>
           <div className="nui-pane__footer nui-pane__footer--absolute space-x-4">
             <Button
               onClick={onClose}
