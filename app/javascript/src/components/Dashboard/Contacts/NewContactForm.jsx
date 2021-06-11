@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import { Input, Switch } from "neetoui/formik";
-import { Button } from "neetoui";
+import { Button, Toastr } from "neetoui";
 
 import {
   newContactInitialValues as initialValues,
@@ -11,6 +11,7 @@ import {
 export default function NewContactForm({ onClose, refetch }) {
   const handleSubmit = async () => {
     try {
+      Toastr.success("Contact added successfully");
       refetch();
       onClose();
     } catch (err) {
