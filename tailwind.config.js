@@ -30,9 +30,9 @@ module.exports = {
           900: "#192040",
         },
       },
-    },
-    maxWidth: {
-      200: "200px",
+      maxWidth: {
+        200: "200px",
+      },
     },
   },
   variants: {
